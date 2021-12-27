@@ -1,41 +1,33 @@
 <template>
   <div class="posts__wrapper">
-    <form class="posts__form" @submit.prevent>
-      <input placeholder="Название" v-model="title" type="text" >
-      <input placeholder="Текст" v-model="text" type="text" >
-      <button v-if="this.text.lenth > 1" @click="addPost()" >Запостить</button>
-    </form>
+    <PostCreate @addPost="addPost" />
     <div class="posts__list">
-      <div v-for="post in posts" :key="post" class="posts__item">
-        {{ post.title }}
-        {{ post.text }}
-      </div>
+      <PostList :posts="posts" />
     </div>
   </div>
 </template>
 <script>
+import PostCreate from "@/components/PostCreate.vue";
+import PostList from "@/components/PostsList.vue";
+
 export default {
-  name: "",
+  // name: "",
   data() {
     return {
-      title: '',
-      text: '',
-      posts: [
-        { id: 1, title: "title1", text: "text" },
-      ],
+      title: "",
+      text: "",
+      posts: [{ id: 1, title: "title1", text: "text" }],
     };
   },
+  components: {
+    PostCreate,
+    PostList,
+  },
   methods: {
-    addPost() {
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        text: this.text,
-      }
-      this.posts.push(newPost);
-      this.title = '';
-      this.text = '';
-    }
+    addPost(post) {
+      // console.log(post);
+      this.posts.push(post)
+    },
   },
 };
 </script>
