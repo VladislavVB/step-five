@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     addPost() {
-      // this.post.id = Date.now();
+      this.post.id = Date.now();
       this.$emit("addPost", this.post);
       this.post = {
         title: "",

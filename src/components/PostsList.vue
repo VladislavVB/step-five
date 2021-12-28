@@ -1,5 +1,9 @@
 <template>
-  <div v-for="post in posts" :key="post" class="posts__item">
+  <div v-for="post in posts" :key="post.id" class="posts__item">
+    <div class="posts__item-head">
+      <button @click="$emit('remove', post)"> Удалить</button>
+      <button @click="$emit('star', post)">В избранное</button>
+    </div>
     {{ post.title }}
     {{ post.text }}
   </div>
@@ -9,9 +13,13 @@ export default {
   props: {
     posts: {
       type: Array,
-      required: true,
-    }
-  }
+    },
+  },
+  methods: {
+    // deleteCard() {
+    //   this.$emit("deleteCard", this.post)
+    // },
+  },
 };
 </script>
 
