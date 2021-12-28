@@ -23,6 +23,13 @@ export default {
     PostCreate,
     PostList,
   },
+  mounted() {
+    console.log(localStorage);
+    // localStorage.clear()
+    console.log(JSON.parse(localStorage.getItem("post")));
+    this.posts = JSON.parse(localStorage.getItem("post"));
+    console.log(this.posts);
+  },
   methods: {
     addPost(post) {
       // console.log(post);
@@ -30,6 +37,7 @@ export default {
     },
     removePost(post) {
       this.posts = this.posts.filter((p) => p.id !== post.id);
+      console.log(JSON.parse(localStorage.getItem("post")));
     },
     starPost(post) {
       console.log(post);
@@ -37,9 +45,6 @@ export default {
       console.log(localStorage);
       // localStorage.getItem("post");
     },
-  },
-  mounted() {
-    this.posts = localStorage.getItem()
   },
 };
 </script>
