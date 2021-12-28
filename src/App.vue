@@ -2,7 +2,7 @@
   <div class="posts__wrapper">
     <PostCreate @addPost="addPost" />
     <div class="posts__list">
-      <PostList :posts="posts" />
+      <PostList :posts="posts" @remove="removePost" @star="starPost" />
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     return {
       title: "",
       text: "",
-      posts: [{ id: 1, title: "title1", text: "text" }],
+      posts: [],
     };
   },
   components: {
@@ -26,8 +26,20 @@ export default {
   methods: {
     addPost(post) {
       // console.log(post);
-      this.posts.push(post)
+      this.posts.push(post);
     },
+    removePost(post) {
+      this.posts = this.posts.filter((p) => p.id !== post.id);
+    },
+    starPost(post) {
+      console.log(post);
+      localStorage.setItem("post", JSON.stringify(post));
+      console.log(localStorage);
+      // localStorage.getItem("post");
+    },
+  },
+  mounted() {
+    this.posts = localStorage.getItem()
   },
 };
 </script>
@@ -72,6 +84,9 @@ body {
     border: 1px solid #fff;
     padding: 20px;
     margin-bottom: 20px;
+    &-head {
+      display: flex;
+    }
   }
 }
 </style>
